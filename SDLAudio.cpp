@@ -45,39 +45,41 @@ int CSDLAudio::PlaySample(const char *kpcPath, CAudioClient* pClient /* = NULL *
 {
 
 	std::lock_guard<std::mutex> lock(m_SampleListMutex);
+	std:: string filename = kpcPath;
+	std::string filePath = std::string("resources/") + filename;
 
 	Mix_Chunk *SampleMixChunk;
 	// See if this sample has already been loaded
-	std::string strFind = kpcPath;
-	SampleHandleMap_t::iterator sampleHandleIter = m_mapSampleHandles.find(strFind);
+	
+	SampleHandleMap_t::iterator sampleHandleIter = m_mapSampleHandles.find(filePath);
 
 
 	if(sampleHandleIter != m_mapSampleHandles.end())
 	{
-		CProjectLogger::GetInstance()->Log("Found %s\n",kpcPath);
+		CProjectLogger::GetInstance()->Log("Found %s\n",filePath.c_str());
 		// The sample is already loaded, just play it
 		SampleMixChunk = sampleHandleIter->second;
 	}
 	else
 	{
 		
-		if(access(kpcPath, F_OK) == -1)
+		if(access(filePath.c_str(), F_OK) == -1)
 		{
-			printf("Failed to open sample for playing: %s\n", kpcPath);
+			printf("Failed to open sample for playing: %s\n", filePath.c_str());
 			exit(0);
 		}
 		
-		CProjectLogger::GetInstance()->Log("Loading %s\n",kpcPath);
+		CProjectLogger::GetInstance()->Log("Loading %s\n",filePath.c_str());
 		// This is a new sample, load it
-		SampleMixChunk = Mix_LoadWAV(kpcPath);
+		SampleMixChunk = Mix_LoadWAV(filePath.c_str());
 	
 		
 		// Now add this path and handle to the map
-		m_mapSampleHandles.insert(SampleHandlePair_t((std::string)kpcPath, SampleMixChunk));
+		m_mapSampleHandles.insert(SampleHandlePair_t(filePath.c_str(), SampleMixChunk));
 
 	}
  	// Now play the sample and get a channel for it
-	CProjectLogger::GetInstance()->Log("Playing %s\n",kpcPath);
+	CProjectLogger::GetInstance()->Log("Playing %s\n",filePath.c_str());
  	int iChannel = Mix_PlayChannel(-1, SampleMixChunk, iLoops);
  
 

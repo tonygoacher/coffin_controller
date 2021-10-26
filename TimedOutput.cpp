@@ -13,7 +13,7 @@ CTimedOutput::CTimedOutput(int pin, bool bDefaultState)
 	sem_init(&m_sem,0,0);
 	Start();
 	m_bDefault = bDefaultState;
-	m_pAppSettings = new INIReader("halloween.ini");
+	m_pAppSettings = new INIReader(INIPATH);
 	m_dwTimePeriod = m_pAppSettings->GetInteger(TIMINGS_SEC,TIMINGS_STROBE,2500);
 }
 

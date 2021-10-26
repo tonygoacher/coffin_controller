@@ -21,7 +21,7 @@ CDoorBell* CDoorBell::GetInstance()
 
 CDoorBell::CDoorBell()
 {
-	m_ApplicationSettings = new INIReader("halloween.ini");
+	m_ApplicationSettings = new INIReader(INIPATH);
 	
 	int pin = m_ApplicationSettings->GetInteger("PINS","DOORBELL", 25);
 	m_pPin = new CMonitoredPin( pin, true);

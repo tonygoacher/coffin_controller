@@ -9,7 +9,7 @@
 CMarkSpaceOutput::CMarkSpaceOutput(int pin, bool bDefault) 
 : COutPin(pin, bDefault)
 {
-	m_pAppSettings = new INIReader("halloween.ini");
+	m_pAppSettings = new INIReader(INIPATH);
 	Start()	;
 }
 

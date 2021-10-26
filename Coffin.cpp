@@ -23,7 +23,7 @@ CCoffin::CCoffin()
 
 	PIGPIO::Instance();
 	
-	m_ApplicationSettings = new INIReader("halloween.ini"); 
+	m_ApplicationSettings = new INIReader(INIPATH); 
 
 
 	int pin = m_ApplicationSettings->GetInteger("PINS","RESET", 8);

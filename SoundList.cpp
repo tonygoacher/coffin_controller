@@ -22,7 +22,7 @@ CSoundList* CSoundList::GetInstance()
 
 CSoundList::CSoundList()
 {
-	m_pAppSettings = new INIReader("halloween.ini");
+	m_pAppSettings = new INIReader(INIPATH);
 	m_iIndex = -1;
 	m_bShutDown = false;
 	

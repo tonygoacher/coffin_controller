@@ -1,6 +1,6 @@
 #pragma once
 
-
+#define INIPATH "resources/halloween.ini"
 #define MARKSPACE_SEC "MARKSPACE"	// The markspace output section
 #define MARKSPACE_ON	"ON"		// Time for marspace to be on
 #define MARKSPACE_OFF	"OFF"		// Time for markspace to be off

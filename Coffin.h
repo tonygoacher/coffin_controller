@@ -8,6 +8,7 @@
 #include "SDLAudio.h"
 #include "INIReader.h"
 #include <list>
+#include "inifile.h"
 
 class CMonitoredPin;
 
